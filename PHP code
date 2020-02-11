@@ -1,0 +1,52 @@
+<?php
+       if(isset($_POST['Name'])){//show data
+          /* echo '<pre>';
+            var_dump($_POST);
+            echo '</pre>';
+            */
+$to  = 'natt405@gmail.com';//put your email here
+$today = date("F j, Y, g:i a");
+$subject = 'WEB150 Portal Contact ' . $today;//you build this too
+$message = '';//you build this
+$email = '';//will come from form
+       
+$message .= 'Name: ' . $_POST['Name'] . PHP_EOL;          
+$message .= 'Email: ' . $_POST['Email'] . PHP_EOL;          
+$message .= 'Comments: ' . $_POST['Comments'] . PHP_EOL;          
+           
+$email = $_POST['Email'];
+
+           
+$headers = 'From: noreply@web-students.net' .  PHP_EOL .
+'Reply-To: ' . $email . PHP_EOL .
+'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+
+
+        }else{//show form
+           echo '
+           <form action="" method="post">
+                <div>
+                    <label>
+                        Name:<br /><input type="text" name="Name" required="required" placeholder="Full Name (required)" title="Name is required" size="44" autofocus />
+                    </label>
+                </div>
+                <div>	
+                    <label>
+                        Email:<br /><input type="email" name="Email" required="required" placeholder="Email (required)" title="A valid email is required" tabindex="20" size="44" />
+                    </label>
+                </div>
+
+                <div>	
+                    <label>
+                        Comments:<br /><textarea name="Comments" cols="36" rows="4" placeholder="Your comments are important to us!"></textarea>
+                    </label>
+                </div>	
+                <div>
+                    <input type="submit" value="submit" />
+                </div>
+                </form>
+           '; 
+        }
+       ?>
